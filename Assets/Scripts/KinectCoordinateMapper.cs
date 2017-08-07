@@ -40,7 +40,7 @@ public class KinectCoordinateMapper : MonoBehaviour
         //各Frameデータのバッファを作成
         bodyIndexFrameDescription = kinectSensor.BodyIndexFrameSource.FrameDescription;
         bodyIndexData = new byte[bodyIndexFrameDescription.Height * bodyIndexFrameDescription.Width];
-        colorFrameDescription = kinectSensor.ColorFrameSource.FrameDescription;
+        colorFrameDescription = kinectSensor.ColorFrameSource.CreateFrameDescription(ColorImageFormat.Rgba);
         colorData = new byte[colorFrameDescription.Height * colorFrameDescription.Width * colorFrameDescription.BytesPerPixel];
         depthFrameDescription = kinectSensor.DepthFrameSource.FrameDescription;
         depthData = new ushort[depthFrameDescription.Width * depthFrameDescription.Height];
@@ -149,6 +149,8 @@ public class KinectCoordinateMapper : MonoBehaviour
         }
         texture.LoadRawTextureData(textureData);
         texture.Apply();
+
+        spriteRenderer.sprite = image;
     }
 
 }
